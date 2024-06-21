@@ -17,14 +17,6 @@ body:
     validations:
       required: true
 
-  - type: input
-    attributes:
-      label: Pterodactyl Panel Version (if applicable)
-      description: Version number of your Panel (latest is not a version)
-      placeholder: 1.4.0
-    validations:
-      required: false
-
   - type: textarea
     attributes:
       label: To Reproduce
