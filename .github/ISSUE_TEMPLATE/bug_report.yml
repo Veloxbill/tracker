@@ -2,18 +2,32 @@ name: Bug Report
 description: Create a report to see it being fixed
 labels: ["bug"]
 body:
-  - type: textarea
-    attributes:
-      label: Describe the issue
-      description: A clear and concise description of what the issue is
-    validations:
-      required: true
-
+- type: dropdown
+  id: products
+  attributes:
+    label: Product
+    description: Which product are you having issues with?
+    options:
+      - Billing System
+      - Module
+      - Service
+      - Front End
+      - Back End
+  validations:
+    required: true
+    
   - type: input
     attributes:
       label: Product Version
       description: Version number of the product you're running (latest is not a version)
       placeholder: 1.4.0
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Describe the issue
+      description: A clear and concise description of what the issue is
     validations:
       required: true
 
