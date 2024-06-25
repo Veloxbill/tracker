@@ -15,12 +15,14 @@ body:
         - Back End
         - Other
     validations:
-      required: true
+      required: false
+      
   - type: input
     attributes:
-      description: Version number of the product you're running (latest is not a version)
+      description: Other Products
       placeholder: 1.4.0
     validations:
+    required: false
     
   - type: input
     attributes:
