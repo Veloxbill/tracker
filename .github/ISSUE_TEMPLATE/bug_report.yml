@@ -2,6 +2,7 @@ name: Bug Report
 description: Create a report to see it being fixed
 labels: ["bug"]
 body:
+
 - type: dropdown
   id: products
   attributes:
@@ -15,6 +16,7 @@ body:
       - Back End
   validations:
     required: true
+
     
   - type: input
     attributes:
