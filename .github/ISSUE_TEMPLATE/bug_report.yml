@@ -3,7 +3,7 @@ description: Create a report to see it being fixed
 labels: ["bug"]
 body:
 
-- type: dropdown
+- type: checkboxes
   id: products
   attributes:
     label: Product
