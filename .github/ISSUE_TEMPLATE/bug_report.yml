@@ -16,15 +16,17 @@ body:
         - Other
     validations:
       required: false
-      
+
   - type: input
+    id: other_products
     attributes:
-      description: Other Products
-      placeholder: 1.4.0
+      label: Other Products
+      placeholder: Enter other product
     validations:
-    required: false
-    
+      required: false
+
   - type: input
+    id: product_version
     attributes:
       label: Product Version
       description: Version number of the product you're running (latest is not a version)
@@ -33,6 +35,7 @@ body:
       required: true
 
   - type: textarea
+    id: describe_issue
     attributes:
       label: Describe the issue
       description: A clear and concise description of what the issue is
@@ -40,17 +43,20 @@ body:
       required: true
 
   - type: textarea
+    id: to_reproduce
     attributes:
       label: To Reproduce
       description: Steps to reproduce the behaviour
-      placeholder: "1. Go to '...'
+      placeholder: |
+        1. Go to '...'
         2. Click on '....'
         3. Scroll down to '.....'
-        4. See error"
+        4. See error
     validations:
       required: false
 
   - type: textarea
+    id: expected_behaviour
     attributes:
       label: Expected Behaviour
       description: What were you expecting to happen?
@@ -58,6 +64,7 @@ body:
       required: false
 
   - type: textarea
+    id: screenshots
     attributes:
       label: Screenshots
       description: If applicable, add screenshots to help explain your problem
@@ -65,6 +72,7 @@ body:
       required: false
 
   - type: textarea
+    id: additional_information
     attributes:
       label: Additional Information
       description: Add more information about the problem if necessary
