@@ -16,10 +16,14 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         PROJECT_NAME="Velox Projects"
+
+        echo "Fetching project ID for project: $PROJECT_NAME"
         PROJECT_ID=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
           -H "Accept: application/vnd.github.inertia-preview+json" \
           https://api.github.com/repos/${{ github.repository }}/projects \
           | jq -r ".[] | select(.name==\"$PROJECT_NAME\") | .id")
+
+        echo "Project ID: $PROJECT_ID"
 
         if [ -z "$PROJECT_ID" ]; then
           echo "Project not found!"
@@ -28,6 +32,7 @@ jobs:
 
         ISSUE_ID=$(jq -r ".issue.node_id" < $GITHUB_EVENT_PATH)
 
+        echo "Adding issue to project..."
         curl -s -H "Authorization: token $GITHUB_TOKEN" \
           -H "Accept: application/vnd.github.inertia-preview+json" \
           -X POST \
