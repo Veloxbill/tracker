@@ -1,19 +1,35 @@
-name: Auto Assign
+name: Auto Assign to Project
+
 on:
   issues:
     types: [opened]
-  pull_request:
-    types: [opened]
+
 jobs:
-  run:
+  assign_to_project:
     runs-on: ubuntu-latest
     permissions:
       issues: write
-      pull-requests: write
+      projects: write
     steps:
-    - name: 'Auto-assign issue'
-      uses: pozil/auto-assign-issue@v1
-      with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          assignees: devdamo
-          numOfAssignee: 1
+    - name: Add issue to Velox Projects
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        PROJECT_NAME="Velox Projects"
+        PROJECT_ID=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+          -H "Accept: application/vnd.github.inertia-preview+json" \
+          https://api.github.com/repos/${{ github.repository }}/projects \
+          | jq -r ".[] | select(.name==\"$PROJECT_NAME\") | .id")
+
+        if [ -z "$PROJECT_ID" ]; then
+          echo "Project not found!"
+          exit 1
+        fi
+
+        ISSUE_ID=$(jq -r ".issue.node_id" < $GITHUB_EVENT_PATH)
+
+        curl -s -H "Authorization: token $GITHUB_TOKEN" \
+          -H "Accept: application/vnd.github.inertia-preview+json" \
+          -X POST \
+          https://api.github.com/projects/columns/$PROJECT_ID/cards \
+          -d "{\"content_id\": $ISSUE_ID, \"content_type\": \"Issue\"}"
