@@ -23,7 +23,7 @@ jobs:
           ISSUE_HTML_URL=$(jq -r '.issue.html_url' $GITHUB_EVENT_PATH)
           
           # JSON-Payload für YouTrack
-          JSON_PAYLOAD=$(jq -n --arg title "$ISSUE_TITLE" --arg body "$ISSUE_BODY" --arg url "$ISSUE_HTML_URL" --arg project "DEIN_PROJEKT_ID" '{
+          JSON_PAYLOAD=$(jq -n --arg title "$ISSUE_TITLE" --arg body "$ISSUE_BODY" --arg url "$ISSUE_HTML_URL" --arg project "0-1" '{
             summary: $title,
             description: "\($body)\n\nGitHub Issue: \($url)",
             project: { id: $project }
